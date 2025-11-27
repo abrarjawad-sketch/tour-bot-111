@@ -1,0 +1,179 @@
+📌 BOT FEATURES REQUIRED**
+
+### **1. Tournament Creation Command**
+
+Command format:
+
+```
+!tour <8/16/32/64> <name> <map> <abilities> <prize>
+```
+
+When someone runs this, the bot must:
+
+* Create a **tournament post** with:
+
+  * Title
+  * Info embed
+  * Buttons:
+
+    * **Register (X/Y)** (green)
+    * **Unregister** (red)
+* Count and update registration live.
+* Store tournament data in a database.
+
+---
+
+### **2. Registration System**
+
+* Users click **Register** → added to the players list.
+* Users click **Unregister** → removed from the list.
+* Bot updates count in real-time (example: 16/16).
+* Only ONE active tournament at a time.
+
+---
+
+### **3. Player List Channel**
+
+Inside settings, admin sets where list goes:
+
+```
+!settourchannel <#channel>
+```
+
+In this channel:
+
+* Every registered player appears in a list.
+* Each name has a **KICK** button (admin-only).
+* If kicked → remove from tournament.
+
+---
+
+### **4. Auto Notification When Tour Is Full**
+
+When register count reaches max:
+
+* Bot sends a message in **admin-only** channel:
+
+  > “Tournament is full. Run `!bracket r1` to generate Round 1.”
+
+---
+
+### **5. Bracket System**
+
+Admin command:
+
+```
+!bracket r1
+```
+
+Bot must:
+
+* Auto generate bracket.
+* Handle byes if player count is odd.
+* Create an embed showing all matches with match numbers.
+
+---
+
+### **6. Match Code Message**
+
+Admin starts match:
+
+```
+!m <match no> <code>
+```
+
+Bot must:
+
+* DM both players:
+
+  ```
+  Your match (Match #) is starting.
+  Code: <code>
+  Join within 2 minutes.
+  ```
+* Also update the bracket channel showing the code.
+
+---
+
+### **7. Winner Qualify System**
+
+Admin reports winner:
+
+```
+!q r1 <@winner>
+```
+
+Bot must:
+
+* Move winner to next round.
+* DM:
+
+  > “Congratulations! You qualified for the next round!”
+* Update brackets.
+
+Final round command:
+
+```
+!q r4 <@winner>
+```
+
+---
+
+### **8. Pick Command (Random Replacement)**
+
+If a player doesn’t join within 2 minutes:
+
+```
+!pick <match no>
+```
+
+Bot will:
+
+* Randomly choose one player from the **reserve list** or registered users.
+* Replace the absent player.
+
+---
+
+### **9. Tournament Ending**
+
+When final winner is decided:
+
+* Bot sends in admin-only:
+
+  > “Tournament has ended. Announcing top placements.”
+
+* Public announcement:
+
+  * **1st Place**
+  * **2nd Place**
+  * **3rd Place**
+
+---
+
+### **10. Admin-Only Commands**
+
+Only ONE required admin role can use:
+
+```
+!tour
+!bracket
+!m
+!q
+!pick
+!kick
+!cancel
+!endtour
+```
+
+Command to set admin role:
+
+```
+!setadminrole <@role>
+```
+
+---
+
+
+
+
+
